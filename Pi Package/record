@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# inputs:filename (no extension), time (minutes)
+
+filename="$1.h264"
+mp4_filename="$1.mp4"
+
+echo $filename
+
+let "a = $2 * 1000 * 60"
+
+raspivid -t $a -fps 20 -e -ex night -awb shade -b 500000 -o $filename
+MP4Box -fps 20 -add $filename $mp4_filename
+
+rm $filename
